@@ -11,27 +11,26 @@ st.markdown("""
 Esta herramienta analiza el equilibrio macroeconómico de corto plazo. El nivel de precios se considera rígido y la producción responde a las variaciones de la demanda agregada.
 """)
 
-# --- PARÁMETROS EN LA BARRA LATERAL ---
+# --- SEGMENTO DE SLIDERS EN APP.PY ---
 with st.sidebar:
     st.header("Parámetros del Modelo")
     
-    # Botón de restablecimiento total
     if st.button("Restablecer Valores Iniciales"):
         st.session_state.clear()
         st.rerun()
 
     st.subheader("Mercado de Bienes (Curva IS)")
-    # --- NEW/MODIFIED CODE: Valores iniciales calibrados para equilibrio visible ---
     alpha = st.slider("Consumo Autónomo (α)", 100, 1500, 800, key="alpha")
     c = st.slider("Propensión Marginal al Consumo (c)", 0.1, 0.9, 0.6, key="c")
     b = st.slider("Sensibilidad de la Inversión (b)", 5, 100, 40, key="b")
-    G = st.slider("Gasto Público (G)", 100, 1500, 600, key="G")
+    # --- CAMBIO QUIRÚRGICO: G inicial a 800 ---
+    G = st.slider("Gasto Público (G)", 100, 1500, 800, key="G")
+    # --- END OF CHANGES ---
 
     st.subheader("Mercado de Dinero (Curva LM)")
     ms = st.slider("Oferta Monetaria Real (M/P)", 100, 5000, 500, key="ms")
     k = st.slider("Sensibilidad al Ingreso (k)", 0.1, 0.9, 0.5, key="k")
     h = st.slider("Sensibilidad a la Tasa de Interés (h)", 10, 200, 100, key="h")
-    # --- END OF CHANGES ---
 
 # --- LÓGICA MATEMÁTICA Y EQUILIBRIO ---
 # Cálculo del equilibrio algebraico
@@ -104,3 +103,6 @@ with st.expander("Interpretación Económica"):
     * **Mercado Monetario (LM):** La tasa de interés equilibra la oferta y demanda de dinero según el ingreso y la preferencia por liquidez.
     * **Dinámica:** Observe cómo el incremento en $G$ eleva $Y$ pero también $i$, lo que genera un desplazamiento parcial de la inversión privada.
     """)
+
+
+
