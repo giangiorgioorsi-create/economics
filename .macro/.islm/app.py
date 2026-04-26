@@ -15,9 +15,13 @@ Esta herramienta analiza el equilibrio macroeconómico de corto plazo. El nivel 
 with st.sidebar:
     st.header("Parámetros del Modelo")
     
+    # --- NEW/MODIFIED CODE: Lógica de restablecimiento de parámetros ---
     if st.button("Restablecer Valores Iniciales"):
+        # Limpiar el session_state obliga a los sliders con 'key' a volver a sus valores iniciales
+        # y permite que la tabla de escenarios se reinicie con los parámetros base.
         st.session_state.clear()
         st.rerun()
+    # --- END OF CHANGES ---
 
     st.subheader("Mercado de Bienes (Curva IS)")
     alpha = st.slider("Consumo Autónomo (α)", 100, 1500, 800, key="alpha")
@@ -103,6 +107,3 @@ with st.expander("Interpretación Económica"):
     * **Mercado Monetario (LM):** La tasa de interés equilibra la oferta y demanda de dinero según el ingreso y la preferencia por liquidez.
     * **Dinámica:** Observe cómo el incremento en $G$ eleva $Y$ pero también $i$, lo que genera un desplazamiento parcial de la inversión privada.
     """)
-
-
-
